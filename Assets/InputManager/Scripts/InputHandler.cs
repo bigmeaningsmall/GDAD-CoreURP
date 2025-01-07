@@ -4,7 +4,7 @@ using System;
 
 public class InputHandler : MonoBehaviour
 {
-    // Define static events for input actions
+    // Define events for input actions
     public event Action<Vector2> OnLeftStick;
     public event Action OnLeftStickCanceled;
     public event Action<Vector2> OnRightStick;
@@ -63,7 +63,8 @@ public class InputHandler : MonoBehaviour
     public event Action OnButtonSelectCanceled;
 
     // Reference to the Input Actions asset
-    [SerializeField] private InputActionAsset inputActions;
+    [SerializeField] private PlayerInput playerInput;
+    private InputActionAsset inputActions;
 
     // Cached input actions
     private InputAction leftStickAction;
@@ -104,6 +105,9 @@ public class InputHandler : MonoBehaviour
 
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
+        inputActions = playerInput.actions;
+        
         // Get individual input actions
         var playerInputMap = inputActions.FindActionMap("Player"); // Replace "Player" with your action map name
 
