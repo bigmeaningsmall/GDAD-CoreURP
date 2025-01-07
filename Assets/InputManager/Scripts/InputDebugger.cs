@@ -2,137 +2,150 @@ using UnityEngine;
 
 public class InputDebugger : MonoBehaviour
 {
+    
+    public InputHandler inputHandler; // Reference to the inputHandler script
+    
     [SerializeField] private bool debugAnalogInputs = true; // Toggle for analog input debug messages
     [SerializeField] private bool debugButtonInputs = true; // Toggle for button input debug messages
-
-    #region InputHandler Events Subscription
+    
+    #region inputHandler Events Subscription
     private void OnEnable()
     {
-        // Subscribe to InputHandler events
-        InputHandler.OnLeftStick += LeftStick;
-        InputHandler.OnRightStick += RightStick;
-        InputHandler.OnButtonSouth += ButtonSouth;
-        InputHandler.OnButtonWest += ButtonWest;
-        InputHandler.OnButtonNorth += ButtonNorth;
-        InputHandler.OnButtonEast += ButtonEast;
-        InputHandler.OnLeftTrigger += LeftTrigger;
-        InputHandler.OnRightTrigger += RightTrigger;
-        InputHandler.OnLeftTriggerPressed += LeftTriggerPress;
-        InputHandler.OnRightTriggerPressed += RightTriggerPress;
-        InputHandler.OnLeftShoulder += LeftShoulder;
-        InputHandler.OnRightShoulder += RightShoulder;
-        InputHandler.OnLeftStickPress += LeftStickPress;
-        InputHandler.OnRightStickPress += RightStickPress;
-        InputHandler.OnPadLeft += PadLeft;
-        InputHandler.OnPadRight += PadRight;
-        InputHandler.OnPadUp += PadUp;
-        InputHandler.OnPadDown += PadDown;
-        InputHandler.OnLeftStickLeft += LeftStickLeft;
-        InputHandler.OnLeftStickRight += LeftStickRight;
-        InputHandler.OnLeftStickUp += LeftStickUp;
-        InputHandler.OnLeftStickDown += LeftStickDown;
-        InputHandler.OnRightStickLeft += RightStickLeft;
-        InputHandler.OnRightStickRight += RightStickRight;
-        InputHandler.OnRightStickUp += RightStickUp;
-        InputHandler.OnRightStickDown += RightStickDown;
-        InputHandler.OnButtonStart += ButtonStart;
-        InputHandler.OnButtonSelect += ButtonSelect;
+        // Subscribe to inputHandler events
+        inputHandler.OnLeftStick += LeftStick;
+        inputHandler.OnRightStick += RightStick;
+        inputHandler.OnButtonSouth += ButtonSouth;
+        inputHandler.OnButtonWest += ButtonWest;
+        inputHandler.OnButtonNorth += ButtonNorth;
+        inputHandler.OnButtonEast += ButtonEast;
+        inputHandler.OnLeftTrigger += LeftTrigger;
+        inputHandler.OnRightTrigger += RightTrigger;
+        inputHandler.OnLeftTriggerPressed += LeftTriggerPress;
+        inputHandler.OnRightTriggerPressed += RightTriggerPress;
+        inputHandler.OnLeftShoulder += LeftShoulder;
+        inputHandler.OnRightShoulder += RightShoulder;
+        inputHandler.OnLeftStickPress += LeftStickPress;
+        inputHandler.OnRightStickPress += RightStickPress;
+        inputHandler.OnPadLeft += PadLeft;
+        inputHandler.OnPadRight += PadRight;
+        inputHandler.OnPadUp += PadUp;
+        inputHandler.OnPadDown += PadDown;
+        inputHandler.OnLeftStickLeft += LeftStickLeft;
+        inputHandler.OnLeftStickRight += LeftStickRight;
+        inputHandler.OnLeftStickUp += LeftStickUp;
+        inputHandler.OnLeftStickDown += LeftStickDown;
+        inputHandler.OnRightStickLeft += RightStickLeft;
+        inputHandler.OnRightStickRight += RightStickRight;
+        inputHandler.OnRightStickUp += RightStickUp;
+        inputHandler.OnRightStickDown += RightStickDown;
+        inputHandler.OnButtonStart += ButtonStart;
+        inputHandler.OnButtonSelect += ButtonSelect;
 
         // Subscribe to canceled events
-        InputHandler.OnLeftStickCanceled += LeftStickCanceled;
-        InputHandler.OnRightStickCanceled += RightStickCanceled;
-        InputHandler.OnButtonSouthCanceled += ButtonSouthCanceled;
-        InputHandler.OnButtonWestCanceled += ButtonWestCanceled;
-        InputHandler.OnButtonNorthCanceled += ButtonNorthCanceled;
-        InputHandler.OnButtonEastCanceled += ButtonEastCanceled;
-        InputHandler.OnLeftTriggerCanceled += LeftTriggerCanceled;
-        InputHandler.OnRightTriggerCanceled += RightTriggerCanceled;
-        InputHandler.OnLeftTriggerReleased += LeftTriggerReleased;
-        InputHandler.OnRightTriggerReleased += RightTriggerReleased;
-        InputHandler.OnLeftShoulderCanceled += LeftShoulderCanceled;
-        InputHandler.OnRightShoulderCanceled += RightShoulderCanceled;
-        InputHandler.OnLeftStickPressCanceled += LeftStickPressCanceled;
-        InputHandler.OnRightStickPressCanceled += RightStickPressCanceled;
-        InputHandler.OnPadLeftCanceled += PadLeftCanceled;
-        InputHandler.OnPadRightCanceled += PadRightCanceled;
-        InputHandler.OnPadUpCanceled += PadUpCanceled;
-        InputHandler.OnPadDownCanceled += PadDownCanceled;
-        InputHandler.OnLeftStickLeftCanceled += LeftStickLeftCanceled;
-        InputHandler.OnLeftStickRightCanceled += LeftStickRightCanceled;
-        InputHandler.OnLeftStickUpCanceled += LeftStickUpCanceled;
-        InputHandler.OnLeftStickDownCanceled += LeftStickDownCanceled;
-        InputHandler.OnRightStickLeftCanceled += RightStickLeftCanceled;
-        InputHandler.OnRightStickRightCanceled += RightStickRightCanceled;
-        InputHandler.OnRightStickUpCanceled += RightStickUpCanceled;
-        InputHandler.OnRightStickDownCanceled += RightStickDownCanceled;
-        InputHandler.OnButtonStartCanceled += ButtonStartCanceled;
-        InputHandler.OnButtonSelectCanceled += ButtonSelectCanceled;
+        inputHandler.OnLeftStickCanceled += LeftStickCanceled;
+        inputHandler.OnRightStickCanceled += RightStickCanceled;
+        inputHandler.OnButtonSouthCanceled += ButtonSouthCanceled;
+        inputHandler.OnButtonWestCanceled += ButtonWestCanceled;
+        inputHandler.OnButtonNorthCanceled += ButtonNorthCanceled;
+        inputHandler.OnButtonEastCanceled += ButtonEastCanceled;
+        inputHandler.OnLeftTriggerCanceled += LeftTriggerCanceled;
+        inputHandler.OnRightTriggerCanceled += RightTriggerCanceled;
+        inputHandler.OnLeftTriggerReleased += LeftTriggerReleased;
+        inputHandler.OnRightTriggerReleased += RightTriggerReleased;
+        inputHandler.OnLeftShoulderCanceled += LeftShoulderCanceled;
+        inputHandler.OnRightShoulderCanceled += RightShoulderCanceled;
+        inputHandler.OnLeftStickPressCanceled += LeftStickPressCanceled;
+        inputHandler.OnRightStickPressCanceled += RightStickPressCanceled;
+        inputHandler.OnPadLeftCanceled += PadLeftCanceled;
+        inputHandler.OnPadRightCanceled += PadRightCanceled;
+        inputHandler.OnPadUpCanceled += PadUpCanceled;
+        inputHandler.OnPadDownCanceled += PadDownCanceled;
+        inputHandler.OnLeftStickLeftCanceled += LeftStickLeftCanceled;
+        inputHandler.OnLeftStickRightCanceled += LeftStickRightCanceled;
+        inputHandler.OnLeftStickUpCanceled += LeftStickUpCanceled;
+        inputHandler.OnLeftStickDownCanceled += LeftStickDownCanceled;
+        inputHandler.OnRightStickLeftCanceled += RightStickLeftCanceled;
+        inputHandler.OnRightStickRightCanceled += RightStickRightCanceled;
+        inputHandler.OnRightStickUpCanceled += RightStickUpCanceled;
+        inputHandler.OnRightStickDownCanceled += RightStickDownCanceled;
+        inputHandler.OnButtonStartCanceled += ButtonStartCanceled;
+        inputHandler.OnButtonSelectCanceled += ButtonSelectCanceled;
     }
 
     private void OnDisable()
     {
-        // Unsubscribe from InputHandler events
-        InputHandler.OnLeftStick -= LeftStick;
-        InputHandler.OnRightStick -= RightStick;
-        InputHandler.OnButtonSouth -= ButtonSouth;
-        InputHandler.OnButtonWest -= ButtonWest;
-        InputHandler.OnButtonNorth -= ButtonNorth;
-        InputHandler.OnButtonEast -= ButtonEast;
-        InputHandler.OnLeftTrigger -= LeftTrigger;
-        InputHandler.OnRightTrigger -= RightTrigger;
-        InputHandler.OnLeftTriggerPressed -= LeftTriggerPress;
-        InputHandler.OnRightTriggerPressed -= RightTriggerPress;
-        InputHandler.OnLeftShoulder -= LeftShoulder;
-        InputHandler.OnRightShoulder -= RightShoulder;
-        InputHandler.OnLeftStickPress -= LeftStickPress;
-        InputHandler.OnRightStickPress -= RightStickPress;
-        InputHandler.OnPadLeft -= PadLeft;
-        InputHandler.OnPadRight -= PadRight;
-        InputHandler.OnPadUp -= PadUp;
-        InputHandler.OnPadDown -= PadDown;
-        InputHandler.OnLeftStickLeft -= LeftStickLeft;
-        InputHandler.OnLeftStickRight -= LeftStickRight;
-        InputHandler.OnLeftStickUp -= LeftStickUp;
-        InputHandler.OnLeftStickDown -= LeftStickDown;
-        InputHandler.OnRightStickLeft -= RightStickLeft;
-        InputHandler.OnRightStickRight -= RightStickRight;
-        InputHandler.OnRightStickUp -= RightStickUp;
-        InputHandler.OnRightStickDown -= RightStickDown;
-        InputHandler.OnButtonStart -= ButtonStart;
-        InputHandler.OnButtonSelect -= ButtonSelect;
+        // Unsubscribe from inputHandler events
+        inputHandler.OnLeftStick -= LeftStick;
+        inputHandler.OnRightStick -= RightStick;
+        inputHandler.OnButtonSouth -= ButtonSouth;
+        inputHandler.OnButtonWest -= ButtonWest;
+        inputHandler.OnButtonNorth -= ButtonNorth;
+        inputHandler.OnButtonEast -= ButtonEast;
+        inputHandler.OnLeftTrigger -= LeftTrigger;
+        inputHandler.OnRightTrigger -= RightTrigger;
+        inputHandler.OnLeftTriggerPressed -= LeftTriggerPress;
+        inputHandler.OnRightTriggerPressed -= RightTriggerPress;
+        inputHandler.OnLeftShoulder -= LeftShoulder;
+        inputHandler.OnRightShoulder -= RightShoulder;
+        inputHandler.OnLeftStickPress -= LeftStickPress;
+        inputHandler.OnRightStickPress -= RightStickPress;
+        inputHandler.OnPadLeft -= PadLeft;
+        inputHandler.OnPadRight -= PadRight;
+        inputHandler.OnPadUp -= PadUp;
+        inputHandler.OnPadDown -= PadDown;
+        inputHandler.OnLeftStickLeft -= LeftStickLeft;
+        inputHandler.OnLeftStickRight -= LeftStickRight;
+        inputHandler.OnLeftStickUp -= LeftStickUp;
+        inputHandler.OnLeftStickDown -= LeftStickDown;
+        inputHandler.OnRightStickLeft -= RightStickLeft;
+        inputHandler.OnRightStickRight -= RightStickRight;
+        inputHandler.OnRightStickUp -= RightStickUp;
+        inputHandler.OnRightStickDown -= RightStickDown;
+        inputHandler.OnButtonStart -= ButtonStart;
+        inputHandler.OnButtonSelect -= ButtonSelect;
 
         // Unsubscribe from canceled events
-        InputHandler.OnLeftStickCanceled -= LeftStickCanceled;
-        InputHandler.OnRightStickCanceled -= RightStickCanceled;
-        InputHandler.OnButtonSouthCanceled -= ButtonSouthCanceled;
-        InputHandler.OnButtonWestCanceled -= ButtonWestCanceled;
-        InputHandler.OnButtonNorthCanceled -= ButtonNorthCanceled;
-        InputHandler.OnButtonEastCanceled -= ButtonEastCanceled;
-        InputHandler.OnLeftTriggerCanceled -= LeftTriggerCanceled;
-        InputHandler.OnRightTriggerCanceled -= RightTriggerCanceled;
-        InputHandler.OnLeftTriggerReleased -= LeftTriggerReleased;
-        InputHandler.OnRightTriggerReleased -= RightTriggerReleased;
-        InputHandler.OnLeftShoulderCanceled -= LeftShoulderCanceled;
-        InputHandler.OnRightShoulderCanceled -= RightShoulderCanceled;
-        InputHandler.OnLeftStickPressCanceled -= LeftStickPressCanceled;
-        InputHandler.OnRightStickPressCanceled -= RightStickPressCanceled;
-        InputHandler.OnPadLeftCanceled -= PadLeftCanceled;
-        InputHandler.OnPadRightCanceled -= PadRightCanceled;
-        InputHandler.OnPadUpCanceled -= PadUpCanceled;
-        InputHandler.OnPadDownCanceled -= PadDownCanceled;
-        InputHandler.OnLeftStickLeftCanceled -= LeftStickLeftCanceled;
-        InputHandler.OnLeftStickRightCanceled -= LeftStickRightCanceled;
-        InputHandler.OnLeftStickUpCanceled -= LeftStickUpCanceled;
-        InputHandler.OnLeftStickDownCanceled -= LeftStickDownCanceled;
-        InputHandler.OnRightStickLeftCanceled -= RightStickLeftCanceled;
-        InputHandler.OnRightStickRightCanceled -= RightStickRightCanceled;
-        InputHandler.OnRightStickUpCanceled -= RightStickUpCanceled;
-        InputHandler.OnRightStickDownCanceled -= RightStickDownCanceled;
-        InputHandler.OnButtonStartCanceled -= ButtonStartCanceled;
-        InputHandler.OnButtonSelectCanceled -= ButtonSelectCanceled;
+        inputHandler.OnLeftStickCanceled -= LeftStickCanceled;
+        inputHandler.OnRightStickCanceled -= RightStickCanceled;
+        inputHandler.OnButtonSouthCanceled -= ButtonSouthCanceled;
+        inputHandler.OnButtonWestCanceled -= ButtonWestCanceled;
+        inputHandler.OnButtonNorthCanceled -= ButtonNorthCanceled;
+        inputHandler.OnButtonEastCanceled -= ButtonEastCanceled;
+        inputHandler.OnLeftTriggerCanceled -= LeftTriggerCanceled;
+        inputHandler.OnRightTriggerCanceled -= RightTriggerCanceled;
+        inputHandler.OnLeftTriggerReleased -= LeftTriggerReleased;
+        inputHandler.OnRightTriggerReleased -= RightTriggerReleased;
+        inputHandler.OnLeftShoulderCanceled -= LeftShoulderCanceled;
+        inputHandler.OnRightShoulderCanceled -= RightShoulderCanceled;
+        inputHandler.OnLeftStickPressCanceled -= LeftStickPressCanceled;
+        inputHandler.OnRightStickPressCanceled -= RightStickPressCanceled;
+        inputHandler.OnPadLeftCanceled -= PadLeftCanceled;
+        inputHandler.OnPadRightCanceled -= PadRightCanceled;
+        inputHandler.OnPadUpCanceled -= PadUpCanceled;
+        inputHandler.OnPadDownCanceled -= PadDownCanceled;
+        inputHandler.OnLeftStickLeftCanceled -= LeftStickLeftCanceled;
+        inputHandler.OnLeftStickRightCanceled -= LeftStickRightCanceled;
+        inputHandler.OnLeftStickUpCanceled -= LeftStickUpCanceled;
+        inputHandler.OnLeftStickDownCanceled -= LeftStickDownCanceled;
+        inputHandler.OnRightStickLeftCanceled -= RightStickLeftCanceled;
+        inputHandler.OnRightStickRightCanceled -= RightStickRightCanceled;
+        inputHandler.OnRightStickUpCanceled -= RightStickUpCanceled;
+        inputHandler.OnRightStickDownCanceled -= RightStickDownCanceled;
+        inputHandler.OnButtonStartCanceled -= ButtonStartCanceled;
+        inputHandler.OnButtonSelectCanceled -= ButtonSelectCanceled;
     }
     #endregion
 
+    void Awake()
+    {
+        
+        if(gameObject.GetComponent<InputHandler>() && inputHandler == null)
+        {
+            inputHandler = gameObject.GetComponent<InputHandler>();
+        }
+
+    }
+    
     private void DebugLog(string message, bool isAnalog)
     {
         if ((isAnalog && debugAnalogInputs) || (!isAnalog && debugButtonInputs))

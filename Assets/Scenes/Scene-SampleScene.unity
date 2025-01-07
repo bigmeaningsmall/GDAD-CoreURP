@@ -967,7 +967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3898099556841186176, guid: 9c526ced48e66634082c4eea171295a8, type: 3}
       propertyPath: debugButtonInputs
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8912973112000964416, guid: 9c526ced48e66634082c4eea171295a8, type: 3}
       propertyPath: m_DefaultControlScheme
