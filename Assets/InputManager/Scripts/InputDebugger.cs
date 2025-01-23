@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class InputDebugger : MonoBehaviour
 {
-    
     public InputHandler inputHandler; // Reference to the inputHandler script
     
     [SerializeField] private bool debugAnalogInputs = true; // Toggle for analog input debug messages
