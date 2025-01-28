@@ -137,7 +137,6 @@ public class InputDebugger : MonoBehaviour
 
     void Awake()
     {
-        
         if(gameObject.GetComponent<InputHandler>() && inputHandler == null)
         {
             inputHandler = gameObject.GetComponent<InputHandler>();
