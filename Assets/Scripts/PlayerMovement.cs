@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     public float moveSpeed = 5f;      // Speed of movement on the plane
     public float jumpForce = 5f;      // Upward force applied for jumps
+    public float gravityMultiplier = 2f; // Multiplier for gravity when falling
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -47,7 +48,11 @@ public class PlayerMovement : MonoBehaviour
     
     private void ButtonSouth()
     {
-        
+        if (isGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+       
     }
     
     #endregion
@@ -73,6 +78,12 @@ public class PlayerMovement : MonoBehaviour
         // Preserve current y-velocity (so jump velocity is maintained)
         Vector3 newVelocity = new Vector3(movement.x, rb.linearVelocity.y, movement.z);
         rb.linearVelocity = newVelocity;
+
+        // Apply additional gravity when falling
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (gravityMultiplier - 1) * Time.deltaTime;
+        }
 
         // Jump if player presses Space and the capsule is on the ground
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
