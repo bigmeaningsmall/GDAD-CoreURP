@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-//using Cinemachine;
 using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour
 {
+    public InputHandler inputHandler; // Reference to the inputHandler script
+    private Vector2 leftStickInput;    // Vector2 to store the left stick input
+    
     public Camera GameCamera;
     public float playerSpeed = 2.0f;
     private float JumpForce = 1.0f;
@@ -14,9 +14,28 @@ public class ThirdPersonController : MonoBehaviour
     private Vector3 playerVelocity;
     public bool groundedPlayer;
     private float gravityValue = -9.81f;
-
-    private void Start()
-    {
+    
+    #region inputHandler Events Subscription
+    private void OnEnable() {
+        // Subscribe to inputHandler events
+        inputHandler.OnLeftStick += LeftStick;
+        inputHandler.OnLeftStickCanceled += LeftStickedCanceled;
+    }
+    private void OnDisable() {
+        // Unsubscribe from inputHandler events
+        inputHandler.OnLeftStick -= LeftStick;
+        inputHandler.OnLeftStickCanceled -= LeftStickedCanceled;
+    }
+    //Input event handlers
+    private void LeftStick(Vector2 input) {
+        leftStickInput = input;
+    }
+    private void LeftStickedCanceled() {
+        leftStickInput = Vector2.zero;
+    }
+    #endregion
+    
+    private void Start() {
         m_Controller = gameObject.GetComponent<CharacterController>();
         m_Animator = gameObject.GetComponentInChildren<Animator>();
     }
@@ -30,7 +49,7 @@ public class ThirdPersonController : MonoBehaviour
             playerVelocity.y = -0.5f;
         }
 
-        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 input = new Vector3(leftStickInput.x, 0, leftStickInput.y);
 
         //trasnform input into camera space
         var forward = GameCamera.transform.forward;
