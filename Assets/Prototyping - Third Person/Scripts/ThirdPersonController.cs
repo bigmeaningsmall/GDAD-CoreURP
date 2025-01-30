@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour
@@ -6,7 +7,9 @@ public class ThirdPersonController : MonoBehaviour
     private Vector2 leftStickInput;    // Vector2 to store the left stick input
     
     public Camera GameCamera;
-    public float playerSpeed = 2.0f;
+    public float playerSpeed = 5.0f;
+    private float runSpeed;
+    public bool running = false;
     private float JumpForce = 1.0f;
     
     private CharacterController m_Controller;
@@ -20,11 +23,17 @@ public class ThirdPersonController : MonoBehaviour
         // Subscribe to inputHandler events
         inputHandler.OnLeftStick += LeftStick;
         inputHandler.OnLeftStickCanceled += LeftStickedCanceled;
+        inputHandler.OnButtonSouth += Jump;
+        inputHandler.OnLeftTriggerPressed += Run;
+        inputHandler.OnLeftTriggerReleased += Run;
     }
     private void OnDisable() {
         // Unsubscribe from inputHandler events
         inputHandler.OnLeftStick -= LeftStick;
         inputHandler.OnLeftStickCanceled -= LeftStickedCanceled;
+        inputHandler.OnButtonSouth -= Jump;
+        inputHandler.OnLeftTriggerPressed -= Run;
+        inputHandler.OnLeftTriggerReleased -= Run;
     }
     //Input event handlers
     private void LeftStick(Vector2 input) {
@@ -33,11 +42,14 @@ public class ThirdPersonController : MonoBehaviour
     private void LeftStickedCanceled() {
         leftStickInput = Vector2.zero;
     }
+ 
     #endregion
     
     private void Start() {
         m_Controller = gameObject.GetComponent<CharacterController>();
         m_Animator = gameObject.GetComponentInChildren<Animator>();
+        
+        runSpeed = playerSpeed * 2;
     }
 
     void Update()
@@ -59,26 +71,39 @@ public class ThirdPersonController : MonoBehaviour
         
         Vector3 move = forward * input.z + right * input.x;
         move.y = 0;
+
+        if (running)
+        {
+            m_Controller.Move(move * Time.deltaTime * runSpeed);
+        }
+        else
+        {
+            m_Controller.Move(move * Time.deltaTime * playerSpeed);
+        }
         
-        m_Controller.Move(move * Time.deltaTime * playerSpeed);
 
         m_Animator.SetFloat("MovementX", input.x);
         m_Animator.SetFloat("MovementZ", input.z);
 
-        if (input != Vector3.zero)
-        {
+        if (input != Vector3.zero) {
             gameObject.transform.forward = forward;
         }
+        
+        //jumping 
+        playerVelocity.y += gravityValue * Time.deltaTime;
 
-        // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
-        {
+        m_Controller.Move(playerVelocity * Time.deltaTime ) ;
+        
+    }
+
+    private void Run()
+    {
+        running=!running;
+    }
+    private void Jump() {
+        if (groundedPlayer) {
             playerVelocity.y += Mathf.Sqrt(JumpForce * -3.0f * gravityValue);
             m_Animator.SetTrigger("Jump");
         }
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-
-        m_Controller.Move(playerVelocity * Time.deltaTime);
     }
 }
