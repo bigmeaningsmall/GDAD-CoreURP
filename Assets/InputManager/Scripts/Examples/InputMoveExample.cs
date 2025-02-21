@@ -23,18 +23,25 @@ public class InputMoveExample : MonoBehaviour
     {
         // Subscribe to inputHandler events
         inputHandler.OnLeftStick += LeftStick;
+        inputHandler.OnLeftStickCanceled += LeftStickCanceled;
     }
 
     private void OnDisable()
     {
         // Unsubscribe from inputHandler events
         inputHandler.OnLeftStick -= LeftStick;
+        inputHandler.OnLeftStickCanceled -= LeftStickCanceled;
     }
     
     //Input event handlers
     private void LeftStick(Vector2 input)
     {
         leftStickInput = input;
+    }
+    
+    private void LeftStickCanceled()
+    {
+        leftStickInput = Vector2.zero;
     }
     
     #endregion
