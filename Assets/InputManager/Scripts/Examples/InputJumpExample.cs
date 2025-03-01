@@ -100,6 +100,7 @@ public class InputJumpExample : MonoBehaviour
         {
             isGrounded = false;
         }
+       
     }
     #endregion
 

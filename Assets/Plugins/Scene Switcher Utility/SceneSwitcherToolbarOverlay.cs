@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -7,6 +9,9 @@ using UnityEditor.Toolbars;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+
+
+
 
 public static class EditorSceneSwitcher
 {
@@ -196,3 +201,4 @@ public class AutoEnterPlayModeToggle : EditorToolbarToggle
         EditorSceneSwitcher.AutoEnterPlaymode = evt.newValue;
     }
 }
+#endif
